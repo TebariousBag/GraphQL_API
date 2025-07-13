@@ -1,5 +1,5 @@
 // import/require graphql with all types we are using
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLID } = require('graphql');
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLID, GraphQLList } = require('graphql');
 // import require lodash
 const _ = require('lodash');
 
@@ -52,6 +52,7 @@ const TaskType = new GraphQLObjectType({
     title: { type: GraphQLString },
     weight: { type: GraphQLInt },
     description: { type: GraphQLString },
+    // adding project here
     project: {
       type: ProjectType,
       resolve(parent, args) {
@@ -64,13 +65,21 @@ const TaskType = new GraphQLObjectType({
 // setting up the properties that can be retrieved for Properties
 const ProjectType = new GraphQLObjectType({
   name: 'Project',
-  fields: {
+  fields: () => ({
     // changing to id
     id: { type: GraphQLID },
     title: { type: GraphQLString },
     weight: { type: GraphQLInt },
-    description: { type: GraphQLString }
-  }
+    description: { type: GraphQLString },
+    // adding tasks here
+    tasks: {
+      type: GraphQLList(TaskType),
+      resolve(parent, args) {
+        // lodash filter returns all that match
+        return _.filter(tasks, { projectId: parent.id });
+      }
+    }
+  })
 });
 
 // the query section, it is like the menu

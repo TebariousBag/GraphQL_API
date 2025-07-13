@@ -1,0 +1,11 @@
+// query to give the description
+{
+  project(id: "1") {
+    title
+    weight
+    description
+	tasks {
+		title
+	}
+  }
+}
