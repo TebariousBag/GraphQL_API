@@ -1,5 +1,5 @@
 // import/require graphql with all types we are using
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLID } = require('../server/node_modules/graphql');
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLID } = require('graphql');
 // import require lodash
 const _ = require('lodash');
 

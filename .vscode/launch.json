@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/tebariousbag/Desktop/Atlas 2025/atlas-web_graphql-1/server",
+      "program": "/Users/tebariousbag/Desktop/Atlas 2025/atlas-web_graphql-1/server/build/Debug/outDebug"
+    }
+  ]
+}
