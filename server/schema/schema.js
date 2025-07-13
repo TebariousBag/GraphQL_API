@@ -1,5 +1,5 @@
 // import/require graphql with all types we are using
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = require('graphql');
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLID } = require('graphql');
 // import require lodash
 const _ = require('lodash');
 
@@ -40,18 +40,16 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     task: {
       type: TaskType,
+      args: {
+        id: { type: GraphQLID }
+      },
       resolve(parent, args) {
-        // an example of an object
-        return {
-          id: '14353',
-          title: 'my first graphql test',
-          weight: 325,
-          description: 'practicing to see if we can retrieve'
-        };
+        return _.find(tasks, { id: args.id });
       }
     }
-  }
+  },
 });
+
 
 //always export, i still forget this sometimes
 // now exporting with our query
