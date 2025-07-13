@@ -1,5 +1,5 @@
 // import/require graphql with all types we are using
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLID, GraphQLList } = require('graphql');
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLID, GraphQLList, GraphQLNonNull } = require('graphql');
 // import require lodash
 const _ = require('lodash');
 
@@ -129,6 +129,33 @@ const RootQuery = new GraphQLObjectType({
 }
 });
 
+// new mutation
+const Mutation = new GraphQLObjectType ({
+  //first arg
+  name: 'Mutation',
+  // second arg
+  fields: {
+    addProject: {
+      type: ProjectType,
+      args: {
+        // add new nonnull
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        weight: { type: new GraphQLNonNull(GraphQLInt) },
+        description: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parent, args) {
+        constnewProject = new Project ({
+          title: args.title,
+          weight: args.weight,
+          description: args.description,
+        });
+        // make sure to save
+        return newProject.save();
+      }
+    }
+  }
+
+})
 
 //always export, i still forget this sometimes
 // now exporting with our query
