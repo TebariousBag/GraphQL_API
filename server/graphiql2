@@ -1,0 +1,9 @@
+// query to give the description
+{
+  task(id: "2") {
+    id
+    title
+    weight
+    description
+  }
+}

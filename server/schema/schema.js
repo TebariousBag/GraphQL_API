@@ -1,5 +1,25 @@
 // import/require graphql with all types we are using
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = require('graphql');
+// import require lodash
+const _ = require('lodash');
+
+// an array of task objects
+const tasks = [
+  // task object 1
+  {
+    id: '1',
+    title: 'Create your first webpage',
+    weight: 1,
+    description: 'Create your first HTML file 0-index.html with: -Add the doctype on the first line (without any comment) -After the doctype, open and close a html tag Open your file in your browser (the page should be blank)}'
+  },
+  // task object 2
+  {
+    id: '2',
+    title: 'Structure your webpage',
+    weight: 1,
+    description: 'Copy the content of 0-index.html into 1-index.html Create the head and body sections inside the html tag, create the head and body tags (empty) in this order'
+  }
+];
 
 // setting up the properties that can be retrieved
 const TaskType = new GraphQLObjectType({
