@@ -13,7 +13,8 @@ app.use('/graphql',graphqlHTTP({
 
 // connecting to mongodb
 mongoose.connect(
-  'mongodb+srv://tristiangdavis:<XGFEW_fU9RLr$L$>@cluster0.pun285y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+  // i used strong password and had to encode it to work
+  'mongodb+srv://tristiangdavis:XGFEW_fU9RLr%24L%24@cluster0.pun285y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 // log to make sure we are connected
