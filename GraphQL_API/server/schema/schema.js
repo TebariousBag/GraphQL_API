@@ -69,6 +69,8 @@ const RootQuery = new GraphQLObjectType({
   name: 'RootQuery',
   // second arg fields
   fields: {
+
+    // task field
     task: {
       type: TaskType,
       args: {
@@ -77,11 +79,10 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         return _.find(tasks, { id: args.id });
       }
-    }
-  },
-  // project
+    },
+
+  // project field
     project: {
-    task: {
       type: ProjectType,
       args: {
         id: { type: GraphQLID }
@@ -90,7 +91,7 @@ const RootQuery = new GraphQLObjectType({
         return _.find(projects, { id: args.id });
       }
     }
-  },
+}
 });
 
 
