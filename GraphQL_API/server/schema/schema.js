@@ -43,8 +43,8 @@ const ProjectType = new GraphQLObjectType({
     tasks: {
       type: GraphQLList(TaskType),
       resolve(parent, args) {
-        // find by id
-        return Task.findById(parent.projectId);
+        // find by id, can have multiple tasks
+        return Task.find({ projectId: parent.id });
       }
     }
   })
@@ -134,13 +134,15 @@ const Mutation = new GraphQLObjectType ({
         // add new nonnull
         title: { type: new GraphQLNonNull(GraphQLString) },
         weight: { type: new GraphQLNonNull(GraphQLInt) },
-        description: { type: new GraphQLNonNull(GraphQLString) }
+        description: { type: new GraphQLNonNull(GraphQLString) },
+        projectId: { type: new GraphQLNonNull(GraphQLID) }
       },
       resolve(parent, args) {
-        const newTask = new Project ({
+        const newTask = new Task ({
           title: args.title,
           weight: args.weight,
           description: args.description,
+          projectId: args.projectId
         });
         // make sure to save
         return newTask.save();
