@@ -1,6 +1,6 @@
 // have to add the values in parenthesis after addProject
 mutation {
-  addProject(title: "Testing", weight: 3, description: "First Test for addProject") {
+  addProject(title: "Bootstrap", weight: 1, description: "Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end development.") {
     id
     title
     weight

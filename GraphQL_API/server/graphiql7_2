@@ -1,6 +1,6 @@
 // have to add the values in parenthesis after addProject
 mutation {
-  addTask(title: "Testing", weight: 3, description: "First Test for addProject") {
+  addTask(title: "Reboot styling", weight: 2, description: "Add Bootstrap to reset the CSS styling") {
     id
     title
     weight
