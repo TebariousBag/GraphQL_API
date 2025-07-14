@@ -6,43 +6,7 @@ const _ = require('lodash');
 const Project = require('../models/project');
 const Task = require('../models/task');
 
-// an array of task objects
-const tasks = [
-  // task object 1
-  {
-    id: '1',
-    title: 'Create your first webpage',
-    weight: 1,
-    description: 'Create your first HTML file 0-index.html with: -Add the doctype on the first line (without any comment) -After the doctype, open and close a html tag Open your file in your browser (the page should be blank)}',
-    projectId: '1'
-  },
-  // task object 2
-  {
-    id: '2',
-    title: 'Structure your webpage',
-    weight: 1,
-    description: 'Copy the content of 0-index.html into 1-index.html Create the head and body sections inside the html tag, create the head and body tags (empty) in this order',
-    projectId: '1'
-  }
-];
-
-// an array of project objects
-const projects = [
-  // project object 1
-  {
-    id: '1',
-    title: 'Advanced HTML',
-    weight: 1,
-    description: 'Welcome to the Web Stack specialization. The 3 first projects will give you all basics of the Web development: HTML, CSS and Developer tools. In this project, you will learn how to use HTML tags to structure a web page. No CSS, no styling - don’t worry, the final page will be “ugly” it’s normal, it’s not the purpose of this project. Important note: details are important! lowercase vs uppercase / wrong letter… be careful!'
-  },
-  // project object 2
-  {
-    id: '2',
-    title: 'Bootstrap',
-    weight: 1,
-    description: 'Copy the content of 0-index.html into 1-index.html Create the head and body sections inside the htBootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development. It contains CSS and JavaScript design templates for typography, forms, buttons, navigation, and other interface components.ml tag, create the head and body tags (empty) in this order'
-  }
-];
+// deleted the two arrays of data
 
 // setting up the properties that can be retrieved for Task
 const TaskType = new GraphQLObjectType({
@@ -59,7 +23,8 @@ const TaskType = new GraphQLObjectType({
     project: {
       type: ProjectType,
       resolve(parent, args) {
-        return _.find(projects, { id: parent.projectId });
+        // find by id
+        return Project.findById(parent.projectId);
       }
     }
   })
@@ -78,8 +43,8 @@ const ProjectType = new GraphQLObjectType({
     tasks: {
       type: GraphQLList(TaskType),
       resolve(parent, args) {
-        // lodash filter returns all that match
-        return _.filter(tasks, { projectId: parent.id });
+        // find by id
+        return Task.findById(parent.projectId);
       }
     }
   })
@@ -99,7 +64,8 @@ const RootQuery = new GraphQLObjectType({
         id: { type: GraphQLID }
       },
       resolve(parent, args) {
-        return _.find(tasks, { id: args.id });
+        // find by id
+        return Task.findById(args.id);
       }
     },
 
@@ -110,7 +76,8 @@ const RootQuery = new GraphQLObjectType({
         id: { type: GraphQLID }
       },
       resolve(parent, args) {
-        return _.find(projects, { id: args.id });
+        // find by id
+        return Project.findById(args.id);
       }
     },
   
@@ -118,7 +85,8 @@ const RootQuery = new GraphQLObjectType({
     tasks: {
       type: GraphQLList(TaskType),
       resolve(parent, args) {
-        return tasks;
+        // find task
+        return Task.find({});
       }
     },
 
@@ -126,7 +94,8 @@ const RootQuery = new GraphQLObjectType({
     projects: {
       type: GraphQLList(ProjectType),
       resolve(parent, args) {
-        return tasks;
+        // find project
+        return Project.find({});
       }
     }
 }
