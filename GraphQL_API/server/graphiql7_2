@@ -1,6 +1,6 @@
 // have to add the values in parenthesis after addProject
 mutation {
-  addProject(title: "Testing", weight: 3, description: "First Test for addProject") {
+  addTask(title: "Testing", weight: 3, description: "First Test for addProject") {
     id
     title
     weight

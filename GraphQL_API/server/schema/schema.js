@@ -2,6 +2,9 @@
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLID, GraphQLList, GraphQLNonNull } = require('graphql');
 // import require lodash
 const _ = require('lodash');
+// need to import models
+const Project = require('../models/project');
+const Task = require('../models/task');
 
 // an array of task objects
 const tasks = [
@@ -135,6 +138,7 @@ const Mutation = new GraphQLObjectType ({
   name: 'Mutation',
   // second arg
   fields: {
+    // our add project
     addProject: {
       type: ProjectType,
       args: {
@@ -144,21 +148,41 @@ const Mutation = new GraphQLObjectType ({
         description: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(parent, args) {
-        constnewProject = new Project ({
+        const newProject = new Project ({
           title: args.title,
           weight: args.weight,
           description: args.description,
         });
         // make sure to save
         return newProject.save();
+      },
+    },
+
+    // our add task
+    addTask: {
+      type: TaskType,
+      args: {
+        // add new nonnull
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        weight: { type: new GraphQLNonNull(GraphQLInt) },
+        description: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parent, args) {
+        const newTask = new Project ({
+          title: args.title,
+          weight: args.weight,
+          description: args.description,
+        });
+        // make sure to save
+        return newTask.save();
       }
     }
   }
-
 })
 
 //always export, i still forget this sometimes
 // now exporting with our query
 module.exports = new GraphQLSchema({
-  query: RootQuery
+  query: RootQuery,
+  mutation: Mutation
 });

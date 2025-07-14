@@ -10,4 +10,4 @@ const projectSchema = new Schema({
 });
 
 // and export it
-module.exports = mongoose.model('Project', taskSchema);
+module.exports = mongoose.model('Project', projectSchema);
